@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:meals_app/components/meal_item.dart';
 
 import '../models/meal.dart';
 
@@ -12,8 +13,12 @@ class CategoryMeals extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemBuilder: (context, index) => Text(
-        categoryMeals[index].title,
+      itemBuilder: (context, index) => MealItem(
+        title: categoryMeals[index].title,
+        imageUrl: categoryMeals[index].imageUrl,
+        duration: categoryMeals[index].duration,
+        complexity: categoryMeals[index].complexity,
+        affordability: categoryMeals[index].affordability,
       ),
       itemCount: categoryMeals.length,
     );
