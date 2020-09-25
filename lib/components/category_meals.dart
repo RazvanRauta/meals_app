@@ -14,12 +14,14 @@ class CategoryMeals extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.builder(
       itemBuilder: (context, index) => MealItem(
-          title: categoryMeals[index].title,
-          imageUrl: categoryMeals[index].imageUrl,
-          duration: categoryMeals[index].duration,
-          complexity: categoryMeals[index].complexity,
-          affordability: categoryMeals[index].affordability,
-          id: categoryMeals[index].id),
+        title: categoryMeals[index].title,
+        imageUrl: categoryMeals[index].imageUrl,
+        duration: categoryMeals[index].duration,
+        complexity: categoryMeals[index].complexity,
+        affordability: categoryMeals[index].affordability,
+        id: categoryMeals[index].id,
+        isSpoonMeal: false,
+      ),
       itemCount: categoryMeals.length,
     );
   }
