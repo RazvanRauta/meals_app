@@ -1,3 +1,5 @@
+import 'package:meals_app/screens/spoon_meal_plan_screen.dart';
+
 import '../models/meal.dart';
 import '../screens/categories_screen.dart';
 import '../screens/favorites_screen.dart';
@@ -33,6 +35,7 @@ Map<String, Widget Function(BuildContext)> routes(
     FiltersScreen.routeName: (ctx) => FiltersScreen(
           setFilters: setFilters,
           currentFilters: filters,
-        )
+        ),
+    SpoonMealPlanScreen.routeName: (ctx) => SpoonMealPlanScreen()
   };
 }

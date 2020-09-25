@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:meals_app/screens/spoon_meal_plan_screen.dart';
 
 import '../components/drawer_content.dart';
 import '../models/meal.dart';
@@ -26,7 +27,8 @@ class _TabsScreenState extends State<TabsScreen> {
           favoriteMeals: favoriteMeals,
         ),
         'title': 'Your Favorites'
-      }
+      },
+      {'page': SpoonMealPlanScreen(), 'title': 'Meal Plans'},
     ];
   }
 
@@ -67,6 +69,13 @@ class _TabsScreenState extends State<TabsScreen> {
             icon: Icon(Icons.star),
             title: Text(
               'Favorites',
+            ),
+          ),
+          BottomNavigationBarItem(
+            backgroundColor: Theme.of(context).primaryColor,
+            icon: Icon(Icons.settings_input_antenna),
+            title: Text(
+              'Meal Plans',
             ),
           ),
         ],

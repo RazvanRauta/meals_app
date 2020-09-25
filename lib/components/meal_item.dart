@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:meals_app/models/spoon_recipe.dart';
 import 'package:meals_app/screens/meals_details_screen.dart';
+import 'package:meals_app/screens/spoon_meal_recipe_screen.dart';
+import 'package:meals_app/services/api_services.dart';
 
 import '../models/meal.dart';
 
@@ -10,15 +13,19 @@ class MealItem extends StatelessWidget {
   final int duration;
   final Complexity complexity;
   final Affordability affordability;
-  const MealItem({
-    Key key,
-    @required this.id,
-    @required this.title,
-    @required this.imageUrl,
-    @required this.duration,
-    @required this.complexity,
-    @required this.affordability,
-  }) : super(key: key);
+  final bool isSpoonMeal;
+  final int servings;
+  const MealItem(
+      {Key key,
+      @required this.id,
+      @required this.title,
+      @required this.imageUrl,
+      @required this.duration,
+      @required this.complexity,
+      @required this.affordability,
+      this.isSpoonMeal,
+      this.servings})
+      : super(key: key);
 
   String get complexityText {
     switch (complexity) {
@@ -56,10 +63,20 @@ class MealItem extends StatelessWidget {
     Navigator.pushNamed(ctx, MealsDetailsScreen.routName, arguments: id);
   }
 
+  void fetchInfo(BuildContext context, String id) async {
+    SpoonRecipe recipe = await ApiService.instance.fetchRecipe(id);
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (_) => SpoonRecipeScreen(
+                  recipe: recipe,
+                )));
+  }
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => selectMeal(context),
+      onTap: () => isSpoonMeal ? fetchInfo(context, id) : selectMeal(context),
       child: Card(
         child: Column(
           children: [
@@ -119,28 +136,42 @@ class MealItem extends StatelessWidget {
                       Text('$duration min')
                     ],
                   ),
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.work,
-                      ),
-                      SizedBox(
-                        width: 6,
-                      ),
-                      Text(complexityText)
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.attach_money,
-                      ),
-                      SizedBox(
-                        width: 6,
-                      ),
-                      Text(affordabilityText)
-                    ],
-                  )
+                  if (!isSpoonMeal)
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.work,
+                        ),
+                        SizedBox(
+                          width: 6,
+                        ),
+                        Text(complexityText)
+                      ],
+                    ),
+                  if (!isSpoonMeal)
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.attach_money,
+                        ),
+                        SizedBox(
+                          width: 6,
+                        ),
+                        Text(affordabilityText)
+                      ],
+                    ),
+                  if (isSpoonMeal)
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.restaurant_menu,
+                        ),
+                        SizedBox(
+                          width: 6,
+                        ),
+                        Text('Servings $servings')
+                      ],
+                    )
                 ],
               ),
             )
