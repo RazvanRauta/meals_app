@@ -1,4 +1,4 @@
-package com.example.meals_app
+package dev.rrazvan.meals_app
 
 import io.flutter.embedding.android.FlutterActivity
 

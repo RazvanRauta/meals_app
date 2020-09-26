@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../components/meal_item.dart';
 import '../models/spoon_meal_plan.dart';
 import '../services/api_services.dart';
 import 'spoon_meals_screen.dart';
